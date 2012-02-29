@@ -9,7 +9,4 @@ spec:
 		--growl \
 		$(EXAMPLES)
 
-coverage:
-	@COV=1 $(MAKE) spec REPORTER=html-cov > coverage.html
-
-.PHONY: spec coverage
+.PHONY: spec
