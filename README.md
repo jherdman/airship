@@ -1,4 +1,4 @@
-# airship [![Build Status](https://secure.travis-ci.org/[jherdman]/[airship].png)](http://travis-ci.org/[jherdman]/[airship])
+# airship [![Build Status](https://secure.travis-ci.org/jherdman/airship.png)](http://travis-ci.org/jherdman/airship)
 
 A wrapper for the Urban Airship API. It's largely an experiment of mine to learn more about event-based programming in Node.js.
 
