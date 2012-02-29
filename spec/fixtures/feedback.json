@@ -1,0 +1,12 @@
+[
+   {
+       "device_token": "1234123412341234123412341234123412341234123412341234123412341234",
+       "marked_inactive_on": "2009-06-22 10:05:00",
+       "alias": "bob"
+   },
+   {
+       "device_token": "ABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCDABCD",
+       "marked_inactive_on": "2009-06-22 10:07:00",
+       "alias": null
+   }
+]
