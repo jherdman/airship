@@ -1,14 +1,19 @@
 # airship [![Build Status](https://secure.travis-ci.org/jherdman/airship.png)](http://travis-ci.org/jherdman/airship)
 
-A wrapper for the Urban Airship API. It's largely an experiment of mine to learn more about event-based programming in Node.js.
+A wrapper for the [Urban Airship](http://urbanairship.com) API. It's largely an experiment of mine to learn more about event-based programming in Node.js.
 
-# Usage
+## Usage
 
 Please see examples in the `integration` directory for usage. Given that this is such an early release, I'm very open to suggestion on how to evolve the API of this library.
 
-# License
+## Resources
 
-## MIT License
+* [Urban Airship](http://urbanairship.com)
+* [Urban Airship documentation](http://urbanairship.com/docs/)
+
+## License
+
+### MIT License
 
 Copyright (c) 2012 James F. Herdman
 
