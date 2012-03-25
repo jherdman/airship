@@ -12,7 +12,7 @@
     "url": "https://github.com/jherdman/airship/issues"
   },
   "engines": {
-    "node": "~0.6.10"
+    "node": "~0.6.3"
   },
   "dependencies": {
   },
