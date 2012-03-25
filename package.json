@@ -23,7 +23,7 @@
   },
   "main": "index",
   "scripts": {
-    "prepublish": "npm prune",
+    "prepublish": "npm prune && ./scripts/prepublish.js",
     "test": "make spec"
   }
 }
