@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Airship : A Node.js Wrapper for the UrbanAirship Push API" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Airship</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jherdman/airship">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Airship</h1>
+          <h2 id="project_tagline">A Node.js Wrapper for the UrbanAirship Push API</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/jherdman/airship/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/jherdman/airship/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>Use It!</h3>
+
+<div class="highlight">
+<pre><span class="c1">// Taken directly from integration specs</span>
+
+<span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">'myApplicationKey'</span>
+  <span class="p">,</span> <span class="nx">secret</span> <span class="o">=</span> <span class="s1">'myApplicationSecret'</span>
+  <span class="p">,</span> <span class="nx">airship</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'airship'</span><span class="p">).</span><span class="nx">createAirship</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">secret</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">deviceToken</span> <span class="o">=</span> <span class="s1">'myDeviceToken'</span>
+  <span class="p">,</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'assert'</span><span class="p">);</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Simple integration scenario:</span>
+<span class="cm"> *</span>
+<span class="cm"> * 1. Register a device with tokens</span>
+<span class="cm"> * 2. Remove a token</span>
+<span class="cm"> * 3. Add another token</span>
+<span class="cm"> */</span>
+
+<span class="kd">var</span> <span class="nx">regReq</span> <span class="o">=</span> <span class="nx">airship</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">deviceToken</span><span class="p">,</span> <span class="p">{</span> <span class="nx">tags</span><span class="o">:</span> <span class="p">[</span><span class="s1">'bacon'</span><span class="p">]</span> <span class="p">});</span>
+
+<span class="c1">// Step 1</span>
+<span class="nx">regReq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Successfully registered device'</span><span class="p">);</span>
+
+  <span class="c1">// Step 2</span>
+  <span class="kd">var</span> <span class="nx">remTokReq</span> <span class="o">=</span> <span class="nx">airship</span><span class="p">.</span><span class="nx">removeTag</span><span class="p">(</span><span class="s1">'bacon'</span><span class="p">);</span>
+
+  <span class="nx">remTokReq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Successfully removed tag from device'</span><span class="p">);</span>
+
+    <span class="c1">// Step 3</span>
+    <span class="kd">var</span> <span class="nx">addTokReq</span> <span class="o">=</span> <span class="nx">airship</span><span class="p">.</span><span class="nx">addTag</span><span class="p">(</span><span class="s1">'waffles'</span><span class="p">);</span>
+
+    <span class="nx">addTokReq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'success'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Successfully added another token'</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">addTokReq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'fail'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Failed to add another token'</span><span class="p">);</span>
+      <span class="nx">assert</span><span class="p">.</span><span class="nx">ifError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="nx">remTokReq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'fail'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Failed to remove tag'</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">.</span><span class="nx">ifError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="nx">regReq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'fail'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Failed to register device'</span><span class="p">);</span>
+  <span class="nx">assert</span><span class="p">.</span><span class="nx">ifError</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h3>Authors and Contributors</h3>
+
+<ul>
+<li><a href="/jherdman" class="user-mention">@jherdman</a></li>
+<li><a href="/samyakbhuta" class="user-mention">@samyakbhuta</a></li>
+</ul><h3>Support or Contact</h3>
+
+<p>File a <a href="https://github.com/jherdman/airship/issues">bug ticket</a> or submit a <a href="https://github.com/jherdman/airship/pulls">pull request</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Airship maintained by <a href="https://github.com/jherdman">jherdman</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("<script type="text/javascript">    var _gaq = _gaq || [];   _gaq.push(['_setAccount', 'UA-15700208-3']);   _gaq.push(['_trackPageview']);    (function() {     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);   })();  </script>");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
