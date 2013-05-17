@@ -1,4 +1,5 @@
-var Airship = require('../lib/airship').Airship
+var expect = require('chai').expect
+  , Airship = require('../lib/airship').Airship
   , airship = new Airship('foo', 'bar')
   , nock = require('nock')
   , uas = nock('https://go.urbanairship.com')
@@ -11,24 +12,28 @@ describe('Airship', function () {
   describe('constructor', function () {
     it('sets the app key', function () {
       var a = new Airship('foo', 'bar');
-      a.appKey.should.eql('foo');
+      expect(a.appKey).to.eql('foo');
     });
 
     it('sets the master secret', function () {
       var a = new Airship('foo', 'bar');
-      a.masterSecret.should.eql('bar');
+      expect(a.masterSecret).to.eql('bar');
     });
 
     it('throws an error if an app key is not provided', function () {
-      (function () {
+      var fn = function () {
         var a = new Airship();
-      }).should.throw('You must provide an app key');
+      };
+
+      expect(fn).to.throw('You must provide an app key');
     });
 
     it('throws an error if a master secret is not provided', function () {
-      (function () {
+      var fn = function () {
         var a = new Airship('fooo');
-      }).should.throw('You must provide your master secret');
+      };
+
+      expect(fn).to.throw('You must provide your master secret');
     });
   });
 

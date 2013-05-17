@@ -1,4 +1,5 @@
-var Request = require('../lib/request').Request
+var expect = require('chai').expect
+  , Request = require('../lib/request').Request
   , nock = require('nock')
   , dummyService = nock('https://go.urbanairship.com');
 
@@ -7,7 +8,7 @@ describe('Request', function () {
     it('sets the auth params to the options', function () {
       var req = new Request({});
       req.setAuth('foo', 'bar');
-      req.options.auth.should.eql('foo:bar');
+      expect(req.options.auth).to.eql('foo:bar');
     });
   });
 
@@ -31,7 +32,7 @@ describe('Request', function () {
       req.options.method = 'GET';
 
       req.on('success', function (d) {
-        d.should.eql('OKAY');
+        expect(d).to.eql('OKAY');
         done();
       });
 
@@ -43,7 +44,7 @@ describe('Request', function () {
       req.options.method = 'GET';
 
       req.on('success', function (d) {
-        d.should.eql({ my: 'data' });
+        expect(d).to.eql({ my: 'data' });
         done();
       });
 
@@ -55,7 +56,7 @@ describe('Request', function () {
       req.options.method = 'GET';
 
       req.on('fail', function (d) {
-        d.should.eql('CLIENT ERROR');
+        expect(d).to.eql('CLIENT ERROR');
         done();
       });
 
@@ -65,7 +66,7 @@ describe('Request', function () {
     it('returns the instance', function () {
       var req = new Request({ path: '/yupyup' });
       req.options.method = 'GET';
-      req.apiCall().should.be.instanceof(Request);
+      expect(req.apiCall()).to.be.instanceOf(Request);
     });
   });
 
@@ -92,7 +93,7 @@ describe('Request', function () {
 
     it('returns the instance', function () {
       var req = new Request({ path: '/pickle' });
-      req.put().should.be.instanceof(Request);
+      expect(req.put()).to.be.instanceOf(Request);
     });
   });
 
@@ -119,7 +120,7 @@ describe('Request', function () {
 
     it('returns the instance', function () {
       var req = new Request({ path: '/spoon' });
-      req.post().should.be.instanceof(Request);
+      expect(req.post()).to.be.instanceOf(Request);
     });
   });
 
@@ -139,7 +140,7 @@ describe('Request', function () {
 
     it('returns the instance', function () {
       var req = new Request({ path: '/bark' });
-      req.get().should.be.instanceof(Request);
+      expect(req.get()).to.be.instanceOf(Request);
     });
   });
 
@@ -159,7 +160,7 @@ describe('Request', function () {
 
     it('returns the instance', function () {
       var req = new Request({ path: '/bat' });
-      req.delete().should.be.instanceof(Request);
+      expect(req.delete()).to.be.instanceOf(Request);
     });
   });
 });
