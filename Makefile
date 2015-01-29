@@ -3,7 +3,6 @@ REPORTER = spec
 
 spec:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--require should \
 		--require nock \
 		--reporter $(REPORTER) \
 		--growl \
