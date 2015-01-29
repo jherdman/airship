@@ -1,8 +1,8 @@
 {
   "name": "airship",
   "description": "A wrapper for the UrbanAirship API",
-  "author": "James F. Herdman <james.herdman@me.com>",
-  "version": "0.1.1",
+  "author": "James F. Herdman <james.herdman@gmail.com>",
+  "version": "0.1.3",
   "keywords": ["urban airship", "api", "push messages", "airship"],
   "repository": {
     "type": "git",
